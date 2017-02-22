@@ -47,9 +47,9 @@ sitemap({
 				fileTimestamp: './src/content.json'
 			},
 			'/page/*': {
-				fileTimestamp: function(path){
+				fileTimestamp: function(path, cb){
 					path = path.replace('/page/', '')
-					return './views/' + path + '.pug'
+					cb('./views/' + path + '.pug')
 				}
 			}
 		},
