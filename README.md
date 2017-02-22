@@ -19,12 +19,12 @@ sitemap({
 		url: 'http://www.example.com/',
 		content: {
 			'/': {
-				priority: 1
+				priority: 1,
+				lastmod: '2015-06-27T15:30:00.000Z'
 			},
 			'/page/*': {
 				priority: 0.7,
-				changefreq: 'monthly',
-				lastmod: '2015-06-27T15:30:00.000Z'
+				changefreq: 'monthly'
 			}
 		},
 		outputFile: './sitemap.xml'
