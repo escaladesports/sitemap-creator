@@ -6,7 +6,6 @@ const minimatch = require('minimatch')
 const cheerio = require('cheerio')
 
 function getPageContent(options, pool, found, done){
-	console.log('getPageContent()')
 	// When done parsing all pages
 	if(pool.length === 0 || Object.keys(found).length >= options.depth){
 		options.log('Done parsing pages...')
@@ -22,7 +21,6 @@ function getPageContent(options, pool, found, done){
 }
 
 function getLinks(options, uri, page, pool, found, done){
-	console.log('getLinks()')
 	const $ = cheerio.load(page)
 	const linkEls = $('a[href]')
 	let progress = 0
@@ -44,7 +42,6 @@ function getLinks(options, uri, page, pool, found, done){
 				meta = meta.attr('http-equiv')
 			}
 			timestamp(options, path, meta, (err, res) => {
-				console.log('timestamp done...')
 				if(err) done(err)
 				else{
 					found[link] = res
@@ -61,7 +58,6 @@ function getLinks(options, uri, page, pool, found, done){
 	function onProgress(){
 		progress++
 		if(progress >= linkEls.length){
-			console.log('Progress done!')
 			// Get next page
 			getPageContent(options, pool, found, done)
 		}
@@ -127,7 +123,6 @@ function createXml(options, found, done){
 
 
 function timestamp(options, page, meta, done){
-	console.log('timestamp()')
 	const rules = options.content
 	if(!rules){
 		if(meta){
