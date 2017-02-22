@@ -10,6 +10,12 @@ sitemap({
 		content: {
 			'/': {
 				fileTimestamp: './package.json'
+			},
+			'/gamemaker': {
+				fileTimestamp: (path, cb) => {
+					console.log(`fileTimestamp function path: ${path}`)
+					cb('./.gitignore')
+				}
 			}
 		},
 		exclude: [

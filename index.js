@@ -147,17 +147,13 @@ function timestamp(options, page, meta, done){
 			if(obj.fileTimestamp){
 				const fileTimestamp = obj.fileTimestamp
 				delete obj.fileTimestamp
-				const file = (typeof fileTimestamp === 'function') ? fileTimestamp(page) : fileTimestamp
-				fs.stat(file, (err, stats) => {
-					if(err){
-						console.error(err)
+				getFilePath(page, fileTimestamp)
+					.then(getModifiedDate)
+					.then(modDate => {
+						obj.lastMod = modDate
 						done(false, obj)
-					}
-					else{
-						obj.lastMod = new Date(stats.mtime).toISOString()
-					}
-					done(false, obj)
-				})
+					})
+					.catch(done)
 			}
 			else{
 				done(false, obj)
@@ -167,6 +163,26 @@ function timestamp(options, page, meta, done){
 	}
 	// If no match
 	done(false, true)
+}
+
+
+function getFilePath(urlPath, filePath){
+	return new Promise((resolve, reject) => {
+		if(typeof filePath === 'string') return resolve(filePath)
+		filePath(urlPath, resolve)
+	})
+}
+function getModifiedDate(file){
+	return new Promise((resolve, reject) => {
+		fs.stat(file, (err, stats) => {
+			if(err){
+				reject(err)
+			}
+			else{
+				resolve(new Date(stats.mtime).toISOString())
+			}
+		})
+	})
 }
 
 
