@@ -93,7 +93,11 @@ function createXml(options, found, done){
 		newLine = '\n'
 	}
 	for(let url in found){
-		let str = [ `${depth}${depth}<loc>${url}</loc>` ]
+		let displayUrl = url
+		if(options.replaceUrl){
+			displayUrl = displayUrl.replace(options.url, options.replaceUrl)
+		}
+		let str = [ `${depth}${depth}<loc>${displayUrl}</loc>` ]
 		if(typeof found[url] === 'object'){
 			for(let i in found[url]){
 				const tag = i.toLowerCase()
