@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Kennedy Rose <krose@escaladesports.com> (https://escaladesports.com)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/escaladesports/sitemap-creator.git"
+  },
   "scripts": {
     "test": "node test/test.js"
   },
