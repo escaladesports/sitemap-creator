@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
+		<loc>https://google.com/</loc>
+		<lastmod>2017-02-22T22:21:04.000Z</lastmod>
+	</url>
+	<url>
 		<loc>https://google.com/basketball-hoops</loc>
+	</url>
+	<url>
+		<loc>https://google.com/gamemaker</loc>
+		<lastmod>2017-02-22T21:31:44.000Z</lastmod>
 	</url>
 	<url>
 		<loc>https://google.com/training-equipment</loc>
@@ -14,13 +22,5 @@
 	</url>
 	<url>
 		<loc>https://google.com/where-to-buy</loc>
-	</url>
-	<url>
-		<loc>https://google.com/</loc>
-		<lastmod>2017-02-22T22:21:04.000Z</lastmod>
-	</url>
-	<url>
-		<loc>https://google.com/gamemaker</loc>
-		<lastmod>2017-02-22T21:31:44.000Z</lastmod>
 	</url>
 </urlset>

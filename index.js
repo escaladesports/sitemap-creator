@@ -37,6 +37,7 @@ function getLinks(options, uri, page, pool, found, done){
 			// If link hasn't been added yet
 			!(link in found)
 		){
+			found[link] = true
 			let meta = $('meta[http-equiv="last-modified"]') || false
 			if(meta){
 				meta = meta.attr('http-equiv')
