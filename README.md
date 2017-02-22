@@ -13,7 +13,7 @@ $ npm install --save sitemap-creator
 ### Basic usage
 
 ```
-const sitemapCreator = require('sitemap-creator')
+const sitemap = require('sitemap-creator')
 
 sitemap({
 		url: 'http://www.example.com/',
