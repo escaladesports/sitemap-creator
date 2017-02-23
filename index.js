@@ -150,7 +150,7 @@ function timestamp(options, page, meta, done){
 				getFilePath(page, val)
 					.then(getModifiedDate)
 					.then(modDate => {
-						obj.lastMod = modDate
+						if(modDate) obj.lastMod = modDate						
 						done(false, obj)
 					})
 					.catch(done)
@@ -158,7 +158,7 @@ function timestamp(options, page, meta, done){
 			else if(val = getCamelCase(obj, 'lastMod')){
 				getLastMod(page, val)
 					.then(modDate => {
-						obj.lastMod = modDate
+						if(modDate) obj.lastMod = modDate	
 						done(false, obj)
 					})
 					.catch(done)
@@ -200,7 +200,7 @@ function getModifiedDate(file){
 	return new Promise((resolve, reject) => {
 		fs.stat(file, (err, stats) => {
 			if(err){
-				reject(err)
+				resolve(false)
 			}
 			else{
 				resolve(new Date(stats.mtime).toISOString())
