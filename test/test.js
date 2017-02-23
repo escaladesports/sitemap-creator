@@ -3,7 +3,7 @@ const sitemap = require('../index.js')
 
 
 
-
+/*
 sitemap({
 		url: 'http://www.goalrilla.com/',
 		replaceUrl: 'https://google.com/',
@@ -30,6 +30,44 @@ sitemap({
 		log: console.log,
 		depth: 2,
 		pretty: true
+	})
+	.then(console.log)
+	.catch(console.error)
+*/
+
+
+
+sitemap({
+		url: `http://localhost:${port}/`,
+		content: {
+			'/': {
+				fileTimestamp: './views/index.pug',
+			},
+			'/product/*': {
+				lastMod: (path, cb) => {
+					console.log('lastMod()')
+					path = path.replace('/product/', '')
+					let lastMod
+					try{
+						const json = require(`./public/json/product/${path}.json`)
+						lastMod = json.lastModified
+					}
+					catch(e){
+
+					}
+					cb(lastMod)
+				}
+			},
+			'/*': {
+				fileTimestamp: (path, cb) => {
+					console.log('fileTimestamp()')
+					path = path.replace('/', '')
+					cb(`./views/${path}.pug`)
+				}
+			}
+		},
+		outputFile: './public/sitemap.xml',
+		log: console.log
 	})
 	.then(console.log)
 	.catch(console.error)

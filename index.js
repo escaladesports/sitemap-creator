@@ -14,16 +14,29 @@ function getPageContent(options, pool, found, done){
 	const url = pool.shift()
 	options.log(`Requesting: ${url} ...`)
 	request(url, (err, res, page) => {
-		if(err) return done(err)
-		if(res.statusCode !== 200) return done(`Status code: ${res.statusCode}`)
+		if(err){
+			options.log(err)
+			return getLinks(options, url, false, pool, found, done)
+		}
+		if(res.statusCode !== 200){
+			options.log(`Status code: ${res.statusCode}`)
+			return getLinks(options, url, false, pool, found, done)
+		}
 		getLinks(options, url, page, pool, found, done)
 	})
 }
 
 function getLinks(options, uri, page, pool, found, done){
+
+	if(!page) return done()
+
 	const $ = cheerio.load(page)
+	if(!$) return done()
 	const linkEls = $('a[href]')
+	if(!linkEls.length) return done()
+		
 	let progress = 0
+
 
 	linkEls.each(function(){
 		let link = $(this).attr('href')
@@ -60,8 +73,12 @@ function getLinks(options, uri, page, pool, found, done){
 		progress++
 		if(progress >= linkEls.length){
 			// Get next page
-			getPageContent(options, pool, found, done)
+			done()
 		}
+	}
+
+	function done(){
+		return getPageContent(options, pool, found, done)
 	}
 }
 
