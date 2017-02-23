@@ -1,7 +1,7 @@
 {
   "name": "sitemap-creator",
   "description": "Crawls a site and creates sitemaps based on glob patterns",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "index.js",
   "author": "Kennedy Rose <krose@escaladesports.com> (https://escaladesports.com)",
   "license": "MIT",
