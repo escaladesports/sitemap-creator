@@ -38,7 +38,7 @@ sitemap({
 
 
 sitemap({
-		url: `http://localhost:${port}/`,
+		url: `http://localhost:8080/`,
 		content: {
 			'/': {
 				fileTimestamp: './views/index.pug',
@@ -66,7 +66,8 @@ sitemap({
 				}
 			}
 		},
-		outputFile: './public/sitemap.xml',
+		outputFile: './test/sitemap.xml',
+		pretty: true,
 		log: console.log
 	})
 	.then(console.log)

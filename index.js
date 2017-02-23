@@ -22,25 +22,31 @@ function getPageContent(options, pool, found, done){
 			options.log(`Status code: ${res.statusCode}`)
 			return getLinks(options, url, false, pool, found, done)
 		}
+		if(res.headers['content-type'].indexOf('text/html') !== 0){
+			if(url in found){
+				delete found[url]
+			}
+			return getLinks(options, url, false, pool, found, done)
+		}
 		getLinks(options, url, page, pool, found, done)
 	})
 }
 
 function getLinks(options, uri, page, pool, found, done){
 
-	if(!page) return done()
+	if(!page) return next()
 
 	const $ = cheerio.load(page)
-	if(!$) return done()
+	if(!$) return next()
 	const linkEls = $('a[href]')
-	if(!linkEls.length) return done()
+	if(!linkEls.length) return next()
 		
 	let progress = 0
 
 
 	linkEls.each(function(){
 		let link = $(this).attr('href')
-		link = url.resolve(uri, link)
+		link = url.resolve(uri, link).split('#')[0]
 		const path = url.parse(link).path
 		if(
 			// If link is from same domain
@@ -73,11 +79,11 @@ function getLinks(options, uri, page, pool, found, done){
 		progress++
 		if(progress >= linkEls.length){
 			// Get next page
-			done()
+			next()
 		}
 	}
 
-	function done(){
+	function next(){
 		return getPageContent(options, pool, found, done)
 	}
 }

@@ -1,27 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>https://google.com/</loc>
-		<lastmod>2017-02-22T22:53:31.000Z</lastmod>
+		<loc>http://localhost:8080/</loc>
 	</url>
 	<url>
-		<loc>https://google.com/basketball-hoops</loc>
-		<lastmod>test</lastmod>
+		<loc>http://localhost:8080/products</loc>
 	</url>
 	<url>
-		<loc>https://google.com/gamemaker</loc>
-		<lastmod>2017-02-22T21:31:44.000Z</lastmod>
+		<loc>http://localhost:8080/videos</loc>
 	</url>
 	<url>
-		<loc>https://google.com/training-equipment</loc>
+		<loc>http://localhost:8080/customer-service</loc>
 	</url>
 	<url>
-		<loc>https://google.com/videos</loc>
+		<loc>http://localhost:8080/where-to-buy</loc>
 	</url>
 	<url>
-		<loc>https://google.com/more</loc>
+		<loc>http://localhost:8080/register</loc>
 	</url>
 	<url>
-		<loc>https://google.com/where-to-buy</loc>
+		<loc>http://localhost:8080/login</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/cart</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t8674</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t8673</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t8672</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t814n</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1275</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1265</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1245</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1235</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1225</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1205</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1370</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1354</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1352</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1322</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1430</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1426</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1410</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1404</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1441</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1550</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1560</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1570</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1580</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/product/t1807</loc>
+	</url>
+	<url>
+		<loc>http://localhost:8080/checkout</loc>
 	</url>
 </urlset>
