@@ -145,11 +145,18 @@ function timestamp(options, page, meta, done){
 				return done(false, obj)
 			}
 			// If it's mapped to a file, get lastMod date from file
-			if(obj.fileTimestamp){
-				const fileTimestamp = obj.fileTimestamp
-				delete obj.fileTimestamp
-				getFilePath(page, fileTimestamp)
+			let val
+			if(val = getCamelCase(obj, 'fileTimestamp')){
+				getFilePath(page, val)
 					.then(getModifiedDate)
+					.then(modDate => {
+						obj.lastMod = modDate
+						done(false, obj)
+					})
+					.catch(done)
+			}
+			else if(val = getCamelCase(obj, 'lastMod')){
+				getLastMod(page, val)
 					.then(modDate => {
 						obj.lastMod = modDate
 						done(false, obj)
@@ -164,6 +171,22 @@ function timestamp(options, page, meta, done){
 	}
 	// If no match
 	done(false, true)
+}
+
+
+function getCamelCase(obj, camel){
+	let val = false
+	if(obj[camel]){
+		val = obj[camel]
+		delete obj[camel]
+	}
+	else{
+		const lower = camel.toLowerCase()
+		if(obj[lower]){
+			delete obj[lower]
+		}
+	}
+	return val
 }
 
 
@@ -183,6 +206,18 @@ function getModifiedDate(file){
 				resolve(new Date(stats.mtime).toISOString())
 			}
 		})
+	})
+}
+
+
+function getLastMod(urlPath, lastMod){
+	return new Promise((resolve, reject) => {
+		if(typeof lastMod === 'string'){
+			resolve(lastMod)
+		}
+		else{
+			lastMod(urlPath, resolve)
+		}
 	})
 }
 

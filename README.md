@@ -35,6 +35,29 @@ sitemap({
 
 ```
 
+### Dynamic timestamps:
+
+A function or a string can be supplied as the `lastMod`.
+
+```
+sitemap({
+		url: 'http://www.example.com/',
+		content: {
+			'/content/**/*': {
+				lastMod: '2017-02-22T21:31:44.000Z'
+			},
+			'/page/*': {
+				fileTimestamp: function(path, cb){
+					const json = require('./data.json')
+					cb(json.lastModified)
+				}
+			}
+		},
+	})
+	.then(console.log)
+	.catch(console.error)
+```
+
 ### Dyanmic file timestamps:
 
 A function or a string can be supplied as the `fileTimestamp`. This will get the last modified date from the file to use as the `lastmod` for the pages that match the glob path.

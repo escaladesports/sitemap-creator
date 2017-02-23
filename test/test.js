@@ -16,6 +16,11 @@ sitemap({
 					console.log(`fileTimestamp function path: ${path}`)
 					cb('./.gitignore')
 				}
+			},
+			'/basketball-*': {
+				lastMod: (path, cb) => {
+					cb('test')
+				}
 			}
 		},
 		exclude: [
