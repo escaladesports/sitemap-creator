@@ -19,10 +19,14 @@ function getPageContent(options, pool, found, done){
 			return getLinks(options, url, false, pool, found, done)
 		}
 		if(res.statusCode !== 200){
-			options.log(`Status code: ${res.statusCode}`)
+			options.log(`Status code ${res.statusCode}`)
+			if(url in found){
+				delete found[url]
+			}
 			return getLinks(options, url, false, pool, found, done)
 		}
 		if(res.headers['content-type'].indexOf('text/html') !== 0){
+			options.log('Not an html page')
 			if(url in found){
 				delete found[url]
 			}
@@ -34,15 +38,36 @@ function getPageContent(options, pool, found, done){
 
 function getLinks(options, uri, page, pool, found, done){
 
-	if(!page) return next()
+	// If not an actual page, move on
+	if(!page){
+		return next()
+	}
 
+	// Get page content
 	const $ = cheerio.load(page)
-	if(!$) return next()
+	if(!$){
+		options.log(`Error parsing page`)
+		return next()
+	}
+
+	//if($('meta[name="robots"][content="noindex"]').length){
+	if($('meta[name="robots"][content="noindex"]').length){
+		options.log(`No index found`)
+		if(uri in found){
+			delete found[uri]
+		}
+		return next()
+	}
+
+	// Get links
 	const linkEls = $('a[href]')
-	if(!linkEls.length) return next()
-		
+	if(!linkEls.length){
+		options.log('No links found')
+		return next()
+	}
 	let progress = 0
 
+	options.log('Links found...')
 
 	linkEls.each(function(){
 		let link = $(this).attr('href')
@@ -64,6 +89,7 @@ function getLinks(options, uri, page, pool, found, done){
 			timestamp(options, path, meta, (err, res) => {
 				if(err) done(err)
 				else{
+					console.log(`Found link: ${link}`)
 					found[link] = res
 					pool.push(link)
 				}
